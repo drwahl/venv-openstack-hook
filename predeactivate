@@ -1,0 +1,23 @@
+#!/bin/bash
+# This hook is run before this virtualenv is deactivated.
+
+# Clear out OpenStack specific variables set by this virtualenv
+unset OS_AUTH_URL
+unset OS_TENANT_ID
+unset OS_TENANT_NAME
+unset OS_USERNAME
+unset OS_PASSWORD
+
+# Restore our old variables
+export OS_AUTH_URL=$saved_openstack_AUTH_URL
+export OS_TENANT_ID=$saved_openstack_TENANT_ID
+export OS_TENANT_NAME=$saved_openstack_TENANT_NAME
+export OS_USERNAME=$saved_openstack_USERNAME
+export OS_PASSWORD=$saved_openstack_PASSWORD
+
+# Cleanup temp OpenStack environment variables
+unset saved_openstack_AUTH_URL
+unset saved_openstack_TENANT_ID
+unset saved_openstack_TENANT_NAME
+unset saved_openstack_USERNAME
+unset saved_openstack_PASSWORD

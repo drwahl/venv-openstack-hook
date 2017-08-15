@@ -1,0 +1,14 @@
+#!/bin/bash
+# This hook is run after every virtualenv is activated.
+
+# Save off the OpenStack variables before we override them
+export saved_openstack_AUTH_URL=$OS_AUTH_URL
+export saved_openstack_TENANT_ID=$OS_TENANT_ID
+export saved_openstack_TENANT_NAME=$OS_TENANT_NAME
+export saved_openstack_USERNAME=$OS_USERNAME
+export saved_openstack_PASSWORD=$OS_PASSWORD
+
+# Load OpenStack creds from $VIRTUAL_ENV/bin/openstackrc.sh
+if [ -f $VIRTUAL_ENV/bin/openstackrc.sh ]; then
+    source $VIRTUAL_ENV/bin/openstackrc.sh
+fi
